@@ -1,7 +1,6 @@
 const Footer=()=>{
     return(
-        <div className="bg-dark">
-            Footer
+        <div className="bg-sky-900 h-20">
         </div>
     )
 }
