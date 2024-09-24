@@ -1,4 +1,3 @@
-import { Dice1 } from "react-bootstrap-icons"
 
 const RegisterAppointment = () =>{
     return(

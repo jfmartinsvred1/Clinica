@@ -1,10 +1,15 @@
 import { BoxArrowLeft, Github, House, Linkedin, List, PersonCircle, Plus, X } from 'react-bootstrap-icons'
 import './sidebar.css'
+import { useNavigate } from 'react-router-dom'
 type SideBarProps = {
   valueLeftSideBar: string,
   closeSideBar: () => void
 }
 const SideBar = ({ valueLeftSideBar, closeSideBar }: SideBarProps) => {
+
+  const navigate = useNavigate();
+
+  
   return (
     <div className={'sidebar fixed top-0 bottom-0 lg:left-0 p-2  w-[300px] overflow-y-auto text-center bg-gray-900 ' + valueLeftSideBar}>
       <div className='text-gray-200 text-xl'>
@@ -23,7 +28,7 @@ const SideBar = ({ valueLeftSideBar, closeSideBar }: SideBarProps) => {
         <span className='text-[14px] ml-4 text-gray-200'>Cadastrar Consulta</span>
       </div>
 
-      <div className='p-2.5 mt-5 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
+      <div onClick={()=>{navigate("/createDoctor")}} className='p-2.5 mt-5 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
         <Plus className='text-sm' />
         <span className='text-[14px] ml-4 text-gray-200'>Cadastrar Médico</span>
       </div>
@@ -31,7 +36,7 @@ const SideBar = ({ valueLeftSideBar, closeSideBar }: SideBarProps) => {
         <List className='text-sm' />
         <span className='text-[14px] ml-4' text-gray-200>Consultas</span>
       </div>
-      <div className='p-2.5 mt-5 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
+      <div onClick={()=>{navigate("/doctors")}} className='p-2.5 mt-5 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
         <List className='text-sm' />
         <span className='text-[14px] ml-4 text-gray-200'>Médicos</span>
       </div>
