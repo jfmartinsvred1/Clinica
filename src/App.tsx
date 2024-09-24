@@ -5,6 +5,21 @@ import { useState } from 'react'
 import RegisterDoctor, { Doctor } from './components/registerDoctor';
 import Doctors from './components/doctors';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import RegisterAppointment from './components/registerAppointment';
+import RegisterClient from './components/registerClient';
+
+export type Client={
+  name:string,
+  lastName:string,
+  cpf:string,
+  cep:string
+}
+
+export type Appointment={
+  client:Client,
+  day:Date
+  doctor:Doctor
+}
 
 function App() {
   const [valueLeftSidebar, setValueLeftSideBar] = useState("left-[-300px]");
@@ -18,8 +33,12 @@ function App() {
   const [doctors, setDoctors] = useState<Doctor[]>(
     [] as Doctor[]
   )
-
-
+  const [appointments, setAppointments]=useState<Appointment[]>(
+    [] as Appointment[]
+  );
+  const [clients,setClients]=useState<Client[]>(
+    [] as Client[]
+  );
 
   return (
     <>
@@ -32,6 +51,8 @@ function App() {
           <Routes>
             <Route path='/doctors' element={<Doctors doctors={doctors} />} />
             <Route path='/createDoctor' element={<RegisterDoctor setDoctors={setDoctors} doctors={doctors} />} />
+            <Route path='/createAppointment' element={<RegisterAppointment doctors={doctors} />}/>
+            <Route path='createClient' element={<RegisterClient clients={clients} setClients={setClients}/>}/>
           </Routes>
 
         </div>
