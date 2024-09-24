@@ -16,6 +16,7 @@ type RegisterDoctorProps = {
     doctors: Doctor[]
 }
 
+
 const RegisterDoctor = ({ setDoctors, doctors }: RegisterDoctorProps) => {
     const days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"];
     const [newDoctor, setNewDoctor] = useState<Doctor>({
