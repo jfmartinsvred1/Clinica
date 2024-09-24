@@ -1,6 +1,8 @@
 import { useState } from "react";
+import {v4 as uuidv4} from 'uuid'
 
 export type Doctor = {
+    id:string;
     name: string;
     lastName: string;
     openingDaysAndTimes: {
@@ -9,26 +11,23 @@ export type Doctor = {
         endTime: string;
     }[];
 };
-type RegisterDoctorProps={
-    setDoctors:(d:Doctor[])=>void,
-    doctors:Doctor[]
+type RegisterDoctorProps = {
+    setDoctors: (d: Doctor[]) => void,
+    doctors: Doctor[]
 }
 
-const RegisterDoctor = ({setDoctors,doctors}:RegisterDoctorProps) => {
+const RegisterDoctor = ({ setDoctors, doctors }: RegisterDoctorProps) => {
     const days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"];
     const [newDoctor, setNewDoctor] = useState<Doctor>({
+        id:uuidv4(),
         name: "",
         lastName: "",
-        openingDaysAndTimes: days.map(day => ({
-            day,
-            startTime: "",
-            endTime: ""
-        }))
+        openingDaysAndTimes:[]
     });
 
     const handleTimeChange = (day: string, type: "startTime" | "endTime", value: string) => {
         setNewDoctor(prevState => ({
-            ...prevState,
+            ...prevState,id:uuidv4(),
             openingDaysAndTimes: prevState.openingDaysAndTimes.map(item =>
                 item.day === day ? { ...item, [type]: value } : item
             )
@@ -51,9 +50,14 @@ const RegisterDoctor = ({setDoctors,doctors}:RegisterDoctorProps) => {
             }));
         }
     };
+    const doctorWithId = { ...newDoctor, id: uuidv4() };
+    function registerNewDoctor(e:React.MouseEvent<HTMLButtonElement, MouseEvent>){
+        e.preventDefault();
+        setDoctors([...doctors,doctorWithId])
+    }
 
     return (
-        <div className="flex justify-center items-center">
+        <div className="bg-white p-5 rounded-xl shadow-2xl w-5/6 flex justify-center items-center">
             <form className="w-full max-w-lg">
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -82,7 +86,7 @@ const RegisterDoctor = ({setDoctors,doctors}:RegisterDoctorProps) => {
                     </div>
                 </div>
                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                            Dia e horário de atendimento
+                    Dia e horário de atendimento
                 </label>
                 {days.map((d, index) => {
                     const dayData = newDoctor.openingDaysAndTimes.find(item => item.day === d);
@@ -135,15 +139,15 @@ const RegisterDoctor = ({setDoctors,doctors}:RegisterDoctorProps) => {
                     );
                 })}
 
-                <button
-                    className="btn"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        setDoctors([...doctors,newDoctor])
-                    }}
-                >
-                    Register
-                </button>
+                <div className=" w-full flex-wrap -mx-3 mb-6 grid justify-items-end">
+                    <button
+                        disabled={(newDoctor.name.length<=2 || newDoctor.name.length<=2 || newDoctor.openingDaysAndTimes.length===0)?true:false}
+                        className="hover:bg-blue-700 p-3 rounded-lg hover:shadow-2xl hover:text-white"
+                        onClick={(e) => registerNewDoctor(e)}
+                    >
+                        Adicionar
+                    </button>
+                </div>
             </form>
         </div>
     );

@@ -1,4 +1,4 @@
-import { BoxArrowLeft, Github, Linkedin, List, PersonCircle, Plus, X } from 'react-bootstrap-icons'
+import { BoxArrowLeft, Github, House, Linkedin, List, PersonCircle, Plus, X } from 'react-bootstrap-icons'
 import './sidebar.css'
 type SideBarProps = {
   valueLeftSideBar: string,
@@ -14,20 +14,24 @@ const SideBar = ({ valueLeftSideBar, closeSideBar }: SideBarProps) => {
         </div>
         <hr className='my-4 text-gray-600' />
       </div>
-      <div className='p-2.5 mt-6 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
+      <div className='p-2.5 mt-5 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
+        <House className='text-sm' />
+        <span className='text-[14px] ml-4 text-gray-200'>Home</span>
+      </div>
+      <div className='p-2.5 mt-5 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
         <Plus className='text-sm' />
         <span className='text-[14px] ml-4 text-gray-200'>Cadastrar Consulta</span>
       </div>
 
-      <div className='p-2.5 mt-6 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
+      <div className='p-2.5 mt-5 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
         <Plus className='text-sm' />
         <span className='text-[14px] ml-4 text-gray-200'>Cadastrar Médico</span>
       </div>
-      <div className='p-2.5 mt-6 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
+      <div className='p-2.5 mt-5 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
         <List className='text-sm' />
         <span className='text-[14px] ml-4' text-gray-200>Consultas</span>
       </div>
-      <div className='p-2.5 mt-6 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
+      <div className='p-2.5 mt-5 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
         <List className='text-sm' />
         <span className='text-[14px] ml-4 text-gray-200'>Médicos</span>
       </div>
