@@ -38,7 +38,7 @@ const Appointments =({appointments}:AppointmentsProps)=>{
         },
         {
             field: 'doctor',
-            headerName: 'Doutor',
+            headerName: 'Dr./Dra.',
             width: 250,
             renderCell: (params) => {
                 const doctor = params.row.doctor;

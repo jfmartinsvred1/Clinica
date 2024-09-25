@@ -50,8 +50,7 @@ function App() {
         <span className='absolute text-white text-4xl top-5 left-4 cursor-pointer' onClick={() => openSidebar()}>
           <FilterLeft className='px-2 bg-gray-900 rounded-md' />
         </span>
-        <div className={`bg-transparent relative gap-5 flex flex-col justify-center items-center top-[64px] md h-[calc(100vh-64px)] lg:left-[300px] lg:w-[calc(100%-300px)] sm:w-[100%] sm:left-[0px]`}>
-
+        <div className={`bg-transparent relative gap-5 flex flex-col justify-center items-center top-[64px] lg:top-[0px] lg:h-[calc(100vh)] md h-[calc(100vh-64px)] lg:left-[300px] lg:w-[calc(100%-300px)] sm:w-[100%] sm:left-[0px]`}>
           <Routes>
             <Route path='/createClient' element={<RegisterClient setLastClient={setLastClient} clients={clients} setClients={setClients}/>}/>
             <Route path='/createDoctor' element={<RegisterDoctor setDoctors={setDoctors} doctors={doctors} />} />
@@ -60,7 +59,6 @@ function App() {
             <Route path='/appointments' element={<Appointments appointments={appointments} />}/>
             <Route path='/doctors' element={<Doctors doctors={doctors} />} />
           </Routes>
-
         </div>
         <SideBar valueLeftSideBar={valueLeftSidebar} closeSideBar={closeSideBar} />
       </BrowserRouter>
