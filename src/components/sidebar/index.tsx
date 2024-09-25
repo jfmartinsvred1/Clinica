@@ -35,11 +35,11 @@ const SideBar = ({ valueLeftSideBar, closeSideBar }: SideBarProps) => {
         <Plus className='text-sm' />
         <span className='text-[14px] ml-4 text-gray-200'>Cadastrar Médico</span>
       </div>
-      <div className='p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
+      <div onClick={()=>{navigate("/clients")}} className='p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
         <List className='text-sm' />
         <span className='text-[14px] ml-4' text-gray-200>Clientes</span>
       </div>
-      <div className='p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
+      <div onClick={()=>{navigate("/appointments")}}  className='p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-sky-700 text-white '>
         <List className='text-sm' />
         <span className='text-[14px] ml-4' text-gray-200>Consultas</span>
       </div>
