@@ -33,7 +33,10 @@ const RegisterClient = ({ clients, setClients,setLastClient }: RegisterClientPro
             <form className="w-full max-w-lg">
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        <label 
+                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            htmlFor="nomeClient"
+                            >
                             Nome
                         </label>
                         <input
@@ -42,13 +45,15 @@ const RegisterClient = ({ clients, setClients,setLastClient }: RegisterClientPro
                             value={newClient.name}
                             type="text"
                             placeholder="Nome..."
+                            id="nomeClient"
                         />
                     </div>
                     <div className="w-full md:w-1/2 px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        <label htmlFor="sobrenomeClient" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Sobrenome
                         </label>
                         <input
+                            id="sobrenomeClient"
                             value={newClient.lastName}
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                             onChange={(e) => setNewClient(prevState => ({ ...prevState, lastName: e.target.value }))}
