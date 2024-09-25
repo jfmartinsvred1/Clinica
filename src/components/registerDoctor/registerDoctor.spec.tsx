@@ -78,6 +78,19 @@ describe('RegisterDoctor', () => {
 
     expect(mockSetDoctors).toHaveBeenCalled();
   });
+  it('given the correct name user, when name >= 3, do not show error message',()=>{
+    const mockSetDoctors = vi.fn();
+    const mockDoctors:Doctor[] = [];
+
+    renderRegisterDoctor(mockSetDoctors,mockDoctors);
+
+    const nomeInput = screen.getByTestId("nomeDoctorInput");
+    const errorMessage = screen.queryByTestId("errorMessageNomeDoctor")
+    fireEvent.change(nomeInput, { target: { value: 'Joa' } });
+
+    expect(errorMessage).not.toBeInTheDocument()
+
+  })
 
   function renderRegisterDoctor(mockSetDoctors:()=>void,mockDoctors:Doctor[]){
     return render(<RegisterDoctor setDoctors={mockSetDoctors} doctors={mockDoctors} />);
