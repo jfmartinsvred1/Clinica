@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { Appointment, Client } from "../../App";
 import { Doctor } from "../registerDoctor";
+import {v4 as uuidv4} from 'uuid'
 
 type RegisterAppointmentProps = {
     doctors: Doctor[];
     lastClient: Client | null;
     clients: Client[];
+    setAppointments:(s:Appointment[])=>void,
+    appointments:Appointment[]
 };
 
-const RegisterAppointment = ({ doctors, lastClient, clients }: RegisterAppointmentProps) => {
+const RegisterAppointment = ({ doctors, lastClient, clients,setAppointments,appointments }: RegisterAppointmentProps) => {
     const [appointment, setAppointment] = useState<Appointment>({
         id: "",
         client: lastClient ? lastClient : clients[0] || { name: "", lastName: "", cpf: "", cep: "" },
@@ -28,6 +31,8 @@ const RegisterAppointment = ({ doctors, lastClient, clients }: RegisterAppointme
 
         setAppointment(prev => ({ ...prev, day: selectedDateTime }));
     };
+    const appointmentWithId = { ...appointment, id: uuidv4() };
+
 
     return (
         <div className="bg-white p-5 rounded-xl shadow-2xl w-5/6 flex justify-center items-center">
@@ -143,7 +148,7 @@ const RegisterAppointment = ({ doctors, lastClient, clients }: RegisterAppointme
                         
                         onClick={(e)=>{
                             e.preventDefault()
-                            console.log(appointment)
+                            setAppointments([...appointments,appointmentWithId])
                         }}
                     >
                         Adicionar

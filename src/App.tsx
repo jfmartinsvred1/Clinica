@@ -55,7 +55,7 @@ function App() {
           <Routes>
             <Route path='/createClient' element={<RegisterClient setLastClient={setLastClient} clients={clients} setClients={setClients}/>}/>
             <Route path='/createDoctor' element={<RegisterDoctor setDoctors={setDoctors} doctors={doctors} />} />
-            <Route path='/createAppointment' element={<RegisterAppointment clients={clients} lastClient={lastClient} doctors={doctors} />}/>
+            <Route path='/createAppointment' element={<RegisterAppointment appointments={appointments} setAppointments={setAppointments} clients={clients} lastClient={lastClient} doctors={doctors} />}/>
             <Route path='/clients' element={<Clients clients={clients} />}/>
             <Route path='/appointments' element={<Appointments appointments={appointments} />}/>
             <Route path='/doctors' element={<Doctors doctors={doctors} />} />
