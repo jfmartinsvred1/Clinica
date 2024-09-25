@@ -66,7 +66,7 @@ const RegisterDoctor = ({ setDoctors, doctors }: RegisterDoctorProps) => {
                             Nome
                         </label>
                         <input
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                             onChange={(e) => setNewDoctor({ ...newDoctor, name: e.target.value })}
                             value={newDoctor.name}
                             type="text"

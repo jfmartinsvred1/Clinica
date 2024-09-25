@@ -32,22 +32,6 @@ const Doctors = ({ doctors }: DoctorsProps) => {
                 </div>
             )
         }
-        // {
-        //     field: 'actions',
-        //     type: 'actions',
-        //     headerName: 'Delete',
-        //     width: 100,
-        //     cellClassName: 'actions',
-        //     getActions: ({ id }) => [
-        //         <GridActionsCellItem
-        //             icon={<Trash/>}
-        //             label="Delete"
-        //             className="textPrimary"
-        //             onClick={(e) => console.log(id)}
-        //             color="inherit"
-        //         />,
-        //     ],
-        // },
     ];
     return (
         <div className="bg-white p-5 rounded-xl shadow-2xl w-5/6 flex justify-center items-center">
@@ -58,8 +42,8 @@ const Doctors = ({ doctors }: DoctorsProps) => {
                         columns={columns}
                         pageSizeOptions={[5]}
                         getRowId={(row) => row.id}
-                        autoHeight // Ajusta a altura automaticamente com base no número de linhas
-                        disableColumnMenu // Desativa o menu de coluna (opcional)
+                        autoHeight 
+                        disableColumnMenu 
                     />
                 </div>
             </div>
