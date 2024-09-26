@@ -12,12 +12,28 @@ type RegisterAppointmentProps = {
 };
 
 const RegisterAppointment = ({ doctors, lastClient, clients,setAppointments,appointments }: RegisterAppointmentProps) => {
+    const specialtyM = [
+        "Endocrinologista",
+        "Cardiologista",
+        "Pediatra",
+        "Dermatologista",
+        "Oftalmologista",
+        "Ortopedista",
+        "Ginecologista",
+        "Urologista",
+        "Neurologista",
+        "Gastroenterologista",
+        "Psiquiatra",
+        "Reumatologista"
+      ];
     const [appointment, setAppointment] = useState<Appointment>({
         id: "",
         client: lastClient ? lastClient : clients[0] || { name: "", lastName: "", cpf: "", cep: "" },
-        day: new Date(),
+        day: new Date(10,10,2024),
+        specialty:specialtyM[0],
         doctor: doctors[0] || { name: "", lastName: "", id: "", openingDaysAndTimes: [] } 
     });
+    
 
     const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedDate = new Date(e.target.value);
@@ -91,6 +107,31 @@ const RegisterAppointment = ({ doctors, lastClient, clients,setAppointments,appo
                         </div>
                     </div>
                 )}
+                <div className="flex flex-wrap -mx-3 mb-6">
+                        <div className="w-full px-3">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                Especialidade
+                            </label>
+                            <div className="relative">
+                                <select
+                                    onChange={(e) => {
+                                        setAppointment(prev => ({ ...prev, specialty: e.target.value }));
+                                    }}
+                                    className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    id="grid-state"
+                                >
+                                {specialtyM.map((s,index)=>(
+                                    <option key={index} value={s}>{s}</option>
+                                ))}
+                                </select>
+                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <div className="flex flex-wrap -mx-3 mb-6 items-center">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -125,13 +166,13 @@ const RegisterAppointment = ({ doctors, lastClient, clients,setAppointments,appo
                                 value={appointment.doctor?.id}
                                 onChange={(e) => {
                                     const selectedDoctor = doctors.find(d => d.id === e.target.value);
-                                    setAppointment(prev => ({ ...prev, doctor: selectedDoctor || { name: "", lastName: "", id: "", openingDaysAndTimes: [] } }));
+                                    setAppointment(prev => ({ ...prev, doctor: selectedDoctor || { name: "",specialty:"", lastName: "", id: "", openingDaysAndTimes: [] } }));
                                 }}
                                 className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="grid-state"
                             >
                                 {doctors.map(doctor => (
-                                    <option value={doctor.id} key={doctor.id}>{doctor.name} {doctor.lastName}</option>
+                                   doctor.specialty===appointment.specialty && <option value={doctor.id} key={doctor.id}>{doctor.name} {doctor.lastName}</option>
                                 ))}
                             </select>
                             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -144,8 +185,7 @@ const RegisterAppointment = ({ doctors, lastClient, clients,setAppointments,appo
                 </div>
                 <div className="w-full flex-wrap -mx-3 mb-6 grid justify-items-end">
                     <button
-                        className="hover:bg-blue-700 p-3 rounded-lg hover:shadow-2xl hover:text-white"
-                        
+                        className="hover:bg-blue-700 p-3 disabled:cursor-not-allowed disabled:bg-white disabled:hover:text-gray-700 rounded-lg hover:shadow-2xl hover:text-white"
                         onClick={(e)=>{
                             e.preventDefault()
                             setAppointments([...appointments,appointmentWithId])

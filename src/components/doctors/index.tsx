@@ -19,6 +19,11 @@ const Doctors = ({ doctors }: DoctorsProps) => {
             width: 110
         },
         {
+            field: "specialty",
+            headerName: 'Especialidade',
+            width: 110
+        },
+        {
             field: 'openingDaysAndTimes',
             headerName: 'Dias',
             width: 250,

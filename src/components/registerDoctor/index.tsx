@@ -5,6 +5,7 @@ import ErrorMessage from "../errorMessage";
 export type Doctor = {
     id: string;
     name: string;
+    specialty:string
     lastName: string;
     openingDaysAndTimes: {
         day: string;
@@ -20,9 +21,24 @@ type RegisterDoctorProps = {
 
 const RegisterDoctor = ({ setDoctors, doctors }: RegisterDoctorProps) => {
     const days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"];
+    const specialtyM = [
+        "Endocrinologista",
+        "Cardiologista",
+        "Pediatra",
+        "Dermatologista",
+        "Oftalmologista",
+        "Ortopedista",
+        "Ginecologista",
+        "Urologista",
+        "Neurologista",
+        "Gastroenterologista",
+        "Psiquiatra",
+        "Reumatologista"
+      ];
     const [newDoctor, setNewDoctor] = useState<Doctor>({
         id: "",
         name: "",
+        specialty:specialtyM?specialtyM[0]:"",
         lastName: "",
         openingDaysAndTimes: [],
     });
@@ -57,7 +73,7 @@ const RegisterDoctor = ({ setDoctors, doctors }: RegisterDoctorProps) => {
         e.preventDefault();
         const doctorWithId = { ...newDoctor, id: uuidv4() };
         setDoctors([...doctors, doctorWithId]);
-        setNewDoctor({ id: "", name: "", lastName: "", openingDaysAndTimes: [] }); // Reset form
+        setNewDoctor({ id: "",specialty:"", name: "", lastName: "", openingDaysAndTimes: [] });
     };
 
     return (
@@ -163,12 +179,36 @@ const RegisterDoctor = ({ setDoctors, doctors }: RegisterDoctorProps) => {
                     );
                 })}
                 <ErrorMessage message="Deve atender pelo menos 1 dia na semana." testId="diasDoctor" show={newDoctor.openingDaysAndTimes.length===0}/>
-
+                    <div className="flex flex-wrap -mx-3 mb-6">
+                        <div className="w-full px-3">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                Especialidade
+                            </label>
+                            <div className="relative">
+                                <select
+                                    onChange={(e) => {
+                                        setNewDoctor(prev => ({ ...prev, specialty: e.target.value }));
+                                    }}
+                                    className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    id="grid-state"
+                                >
+                                {specialtyM.map((s,index)=>(
+                                    <option key={index} value={s}>{s}</option>
+                                ))}
+                                </select>
+                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <div className="w-full flex-wrap -mx-3 mb-6 grid justify-items-end">
                     <button
                         data-testid="btnAdicionarDoctor"
                         disabled={newDoctor.name.length <= 2 || newDoctor.lastName.length <= 2 || newDoctor.openingDaysAndTimes.length === 0}
-                        className="hover:bg-blue-700 p-3 rounded-lg hover:shadow-2xl hover:text-white"
+                        className=" hover:bg-blue-700 p-3 disabled:cursor-not-allowed disabled:bg-white disabled:hover:text-gray-700 rounded-lg hover:shadow-2xl hover:text-white"
                         onClick={registerNewDoctor}
                     >
                         Adicionar

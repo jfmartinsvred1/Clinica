@@ -20,6 +20,7 @@ export type Client={
 export type Appointment={
   id:string,
   client:Client|null,
+  specialty:string,
   day:Date
   doctor:Doctor|null
 }

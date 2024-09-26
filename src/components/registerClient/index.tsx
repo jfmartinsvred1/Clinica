@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Client } from "../../App"
 import { useNavigate } from "react-router-dom"
+import ErrorMessage from "../errorMessage"
 
 type RegisterClientProps = {
     clients: Client[],
@@ -47,6 +48,7 @@ const RegisterClient = ({ clients, setClients,setLastClient }: RegisterClientPro
                             placeholder="Nome..."
                             id="nomeClient"
                         />
+                        <ErrorMessage message="Nome deve ter 3 caracteres ou mais." testId="nomeClient" show={newClient.name.length<3 && newClient.name.length!==0}/>
                     </div>
                     <div className="w-full md:w-1/2 px-3">
                         <label htmlFor="sobrenomeClient" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -60,6 +62,7 @@ const RegisterClient = ({ clients, setClients,setLastClient }: RegisterClientPro
                             type="text"
                             placeholder="Sobrenome..."
                         />
+                        <ErrorMessage message="Sobrenome deve ter 3 caracteres ou mais." testId="sobrenomeClient" show={newClient.lastName.length<3 && newClient.lastName.length!==0}/>
                     </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6 items-center">
@@ -76,7 +79,7 @@ const RegisterClient = ({ clients, setClients,setLastClient }: RegisterClientPro
                             maxLength={14}
                             onChange={(e) => setNewClient(prevState => ({ ...prevState, cpf: e.target.value }))}
                         />
-
+                        <ErrorMessage message="CPF deve estar no formato certo.(XXX.XXX.XXX-XX)" testId="cpfClient" show={newClient.cpf.length<14 && newClient.cpf.length!=0}/>
                     </div>
 
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -92,20 +95,22 @@ const RegisterClient = ({ clients, setClients,setLastClient }: RegisterClientPro
                             value={newClient.cep}
                             onChange={(e) => setNewClient(prevState => ({ ...prevState, cep: e.target.value }))}
                         />
+                        <ErrorMessage message="CEP deve estar no formato certo(XXXXX-XXX)." testId="cepClient" show={newClient.cep.length<9 && newClient.cep.length!=0}/>
+                        
                     </div>
                 </div>
 
-                <div className=" w-full  -mx-3 mb-6 grid flex-row justify-items-end">
+                <div className=" w-full gap-3 mx-3 mb-6 grid flex-row justify-items-end">
                     <button
                         disabled={(newClient.name.length <= 2 || newClient.name.length <= 2 || newClient.cpf.length < 14 || newClient.cep.length < 9) ? true : false}
-                        className="hover:bg-blue-700 p-3 rounded-lg hover:shadow-2xl hover:text-white"
+                        className=" hover:bg-blue-700 p-3 disabled:cursor-not-allowed disabled:bg-white disabled:hover:text-gray-700 rounded-lg hover:shadow-2xl hover:text-white"
                         onClick={(e) => { createClient(e) }}
                     >
                         Adicionar
                     </button>
                     <button
                         disabled={(newClient.name.length <= 2 || newClient.name.length <= 2 || newClient.cpf.length < 14 || newClient.cep.length < 9) ? true : false}
-                        className="hover:bg-blue-700 p-3 rounded-lg hover:shadow-2xl hover:text-white"
+                        className=" hover:bg-blue-700 p-3 disabled:cursor-not-allowed disabled:bg-white disabled:hover:text-gray-700 rounded-lg hover:shadow-2xl hover:text-white"
                         onClick={(e) => createClientToAppointment(e)}
                     >
                         Adicionar e Registrar Consulta
